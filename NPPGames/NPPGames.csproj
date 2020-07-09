@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{DB16AB7B-B1D5-4CBA-A5B8-980C62DBFE97}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NPPGames</RootNamespace>
+    <AssemblyName>NPPGames</AssemblyName>
+    <OutputPath>bin\Debug\</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug-x64</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release-x64</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Infrastructure\MachineInfo.cs" />
+    <Compile Include="Core\Infrastructure\Win32Console.cs" />
+    <Compile Include="Core\IRenderer.cs" />
+    <Compile Include="Core\IShooter.cs" />
+    <Compile Include="Core\Keyboard.cs" />
+    <Compile Include="Core\Leaderboard.cs" />
+    <Compile Include="Core\LeaderboardPlayer.cs" />
+    <Compile Include="Core\Renderers\ConsoleRenderer.cs" />
+    <Compile Include="Core\Scenes\LeaderboardScene.cs" />
+    <Compile Include="Core\Renderers\NppRenderer.cs" />
+    <Compile Include="Core\PerformanceLogger.cs" />
+    <Compile Include="Core\Services\ILeaderboardService.cs" />
+    <Compile Include="Core\Services\LeaderboardService.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\CollidableSprite.cs" />
+    <Compile Include="Core\CollisionController.cs" />
+    <Compile Include="Core\Game.cs" />
+    <Compile Include="Core\GameData.cs" />
+    <Compile Include="Core\ICollider.cs" />
+    <Compile Include="Core\ICollisionController.cs" />
+    <Compile Include="Core\ISpriteGroup.cs" />
+    <Compile Include="Core\IUpdateSpriteHandler.cs" />
+    <Compile Include="Core\Primitives\Bounds.cs" />
+    <Compile Include="Core\Primitives\Direction.cs" />
+    <Compile Include="Core\Primitives\Size.cs" />
+    <Compile Include="Core\RendererData.cs" />
+    <Compile Include="Core\Playerboard.cs" />
+    <Compile Include="Core\Sprite.cs" />
+    <Compile Include="Core\SpriteGroup.cs" />
+    <Compile Include="Core\Scene.cs" />
+    <Compile Include="Core\Primitives\Vector2D.cs" />
+    <Compile Include="Core\TrajectoryController.cs" />
+    <Compile Include="Core\TrajectoryRendererData.cs" />
+    <Compile Include="Core\ITrajectory.cs" />
+    <Compile Include="Games\SpaceInvaders\Alien.cs" />
+    <Compile Include="Games\SpaceInvaders\AlienArsenal.cs" />
+    <Compile Include="Games\SpaceInvaders\AlienGroup.cs" />
+    <Compile Include="Games\SpaceInvaders\AlienTrajectoryController.cs" />
+    <Compile Include="Core\Audio\AudioLoop.cs" />
+    <Compile Include="Core\Audio\AudioTrack.cs" />
+    <Compile Include="Core\Audio\AudioTrackPlayer.cs" />
+    <Compile Include="Core\Audio\DelayedAudioTrack.cs" />
+    <Compile Include="Core\Audio\IAudioTrack.cs" />
+    <Compile Include="Core\Audio\IPlayAudio.cs" />
+    <Compile Include="Core\Audio\NAudioTrack.cs" />
+    <Compile Include="Games\SpaceInvaders\Bullet.cs" />
+    <Compile Include="Games\SpaceInvaders\Bunker.cs" />
+    <Compile Include="Games\SpaceInvaders\Player.cs" />
+    <Compile Include="Games\SpaceInvaders\Scenes\GameOverScene.cs" />
+    <Compile Include="Games\SpaceInvaders\Scenes\NewGameScene.cs" />
+    <Compile Include="Games\SpaceInvaders\Scenes\PlayGameScene.cs" />
+    <Compile Include="Games\SpaceInvaders\Scenes\SILeaderboardScene.cs" />
+    <Compile Include="Games\SpaceInvaders\Scenes\SIScene.cs" />
+    <Compile Include="Games\SpaceInvaders\SIGameData.cs" />
+    <Compile Include="Games\SpaceInvaders\SpaceInvaders.cs" />
+    <Compile Include="Games\SpaceInvaders\SpriteTypes.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="PluginInfrastructure\ClikeStringArray.cs" />
+    <Compile Include="PluginInfrastructure\DllExport\DllExportAttribute.cs" />
+    <Compile Include="Core\InputProcessor.cs" />
+    <Compile Include="Core\UserControls\Textbox.cs" />
+    <Compile Include="PluginInfrastructure\Win32.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="PluginInfrastructure\GatewayDomain.cs" />
+    <Compile Include="PluginInfrastructure\NotepadPPGateway.cs" />
+    <Compile Include="PluginInfrastructure\ScintillaGateway.cs" />
+    <Compile Include="PluginInfrastructure\IScintillaGateway.cs" />
+    <Compile Include="PluginInfrastructure\NppPluginNETBase.cs" />
+    <Compile Include="PluginInfrastructure\NppPluginNETHelper.cs" />
+    <Compile Include="PluginInfrastructure\Docking_h.cs" />
+    <Compile Include="PluginInfrastructure\MenuCmdID_h.cs" />
+    <Compile Include="PluginInfrastructure\Scintilla_iface.cs" />
+    <Compile Include="PluginInfrastructure\Msgs_h.cs" />
+    <Compile Include="PluginInfrastructure\Preference_h.cs" />
+    <Compile Include="PluginInfrastructure\Resource_h.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PluginInfrastructure\UnmanagedExports.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TupleList.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Games\SpaceInvaders\Audio\Data\SI01.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SI02.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SI03.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SI04.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SIAB.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SIAD.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SIPB.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SIPD.wav" />
+    <None Include="Games\SpaceInvaders\Audio\Data\SoundEffects.aup" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Games\SpaceInvaders\Audio\Data\explosion.wav" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\shoot.wav" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SI01.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SI02.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SI03.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SI04.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SIAB.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SIAD.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SIPB.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SIPD.mp3" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808005.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808013.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808024.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08080e9.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080814f.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08081e7.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08082a8.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808317.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08083c8.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08084cc.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08084d4.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08084e1.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808529.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080852f.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080859b.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08085a2.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080860b.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808736.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808741.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808851.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808881.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808904.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080891f.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808923.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e080895c.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08089a0.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08089b6.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e08089b9.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808a4f.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808a9b.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808bf8.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808c88.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808cd7.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\SoundEffects_data\e08\d08\e0808cf0.au" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\ufo_highpitch.wav" />
+    <Content Include="Games\SpaceInvaders\Audio\Data\ufo_lowpitch.wav" />
+    <Content Include="Games\SpaceInvaders\Characters.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\PluginInfrastructure\DllExport\NppPlugin.DllExport.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

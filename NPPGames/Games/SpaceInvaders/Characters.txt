@@ -1,0 +1,51 @@
+﻿alien30A
+{@ @} 
+ / \    
+alien30B    
+{@ @} 
+ \ /  
+       
+alien20A
+ '  ' 
+\^/\^/
+ 
+alien20B
+ '  ' 
+/^\/^\
+       
+alien10A
+/[..]\
+ |~~| 
+alien10B
+/[..]\
+ /~~\ 
+       
+alienMother
+_/MM\_
+qWAAWp
+
+player
+    /\     
+ ^ /~~\ ^ 
+|--------|
+|--------|
+
+
+playerExplode
+ *^ - - *
+*  -   - *
+* -  ^   *
+ *   ~  *
+alienExplode
+ \||/ 
+ /||\ 
+     
+
+bunker
+/MMMMM\
+MMMMMMM
+MMM MMM
+
+ OOOOO
+OOOOOOO
+OOO OOO
