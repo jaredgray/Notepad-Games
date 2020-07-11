@@ -11,6 +11,8 @@ namespace NPPGames.Core
         where TScene : Scene
         where TGameData : GameData
     {
+        public event EventHandler GameOver;
+
         public int UpdateRateInMilliseconds { get; set; }
         public static bool DO_LOG = true;
         protected IRenderer Renderer { get; private set; }
@@ -85,6 +87,8 @@ namespace NPPGames.Core
                 {
                     GameLoopIteration();
                 }
+                if (Quit)
+                    break;
             }
             CleanupGame();
             Quit = true;
@@ -109,22 +113,36 @@ namespace NPPGames.Core
             if (GameData.Keyboard.IsKeyDown(Win32.Win32Keyboard.VirtualKeyStates.VK_ESCAPE))
             //if (GameData.Keyboard.IsKeyDown(ConsoleKey.Escape))
             {
+                Quit = true;
                 GameData.IsActive = GameData.IsAlive = false;
             }
         }
 
         private void CleanupGame()
         {
-            //GameThread.Abort();
-            GameData.IsAlive = false;
-            GameData.IsActive = false;
+            Logger.WriteLine($"{DateTime.Now} CleanupGame()");
+            GameData.IsAlive = GameData.IsActive = false;
+
             StopGameLoop();
             Scene.GameLoopStopped();
+
+            Renderer.Dispose();
+            Renderer = null;
+
             // TODO: need a way to log the instance information (windowid or whatever)
             //Logger.WriteLine($"{WindowId}-{DateTime.Now} CleanupGame()");
-            Logger.WriteLine($"{DateTime.Now} CleanupGame()");
-            Logger.StopLogging();
+
+            Logger.WriteLine($"{DateTime.Now} Invoking GameOver {(GameOver != null)}");
+            GameOver?.Invoke(this, EventArgs.Empty);
+
+            Logger.WriteLine($"{DateTime.Now} Aborting GameThread");
+            GameThread.Abort();
+
+            Logger.WriteLine($"{DateTime.Now} GameThread aborted { GameThread.IsAlive }");
+
+            Logger.Dispose();
             Logger = null;
+            GameThread = null;
         }
 
 

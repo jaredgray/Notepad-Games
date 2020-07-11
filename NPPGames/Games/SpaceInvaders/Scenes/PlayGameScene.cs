@@ -84,7 +84,7 @@ namespace NPPGames.Games.SpaceInvaders
         private void BuildCharacters()
         {
             //Player = new Sprite(14, 5)
-            Player = new Player(GameData, this, 10, 4)
+            Player = new Player(GameData, this)
             {
                 LayerOrder = 0,
                 Type = SpriteTypes.PLAYER,
@@ -182,6 +182,7 @@ namespace NPPGames.Games.SpaceInvaders
                         Thread.Sleep(1000);
                         MainAudioPlayer.Play();
                         GameData.StopGame = false;
+                        ResumeGame();
                     }
                     else
                     {

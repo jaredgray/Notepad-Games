@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NPPGames.Core.Primitives;
 
 namespace NPPGames.Core
 {
-    public interface IRenderer
+    public interface IRenderer : IDisposable
     {
         /// <summary>
         /// initializes the renderer so that it is in a state ready to render to it's output

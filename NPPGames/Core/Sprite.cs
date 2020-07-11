@@ -37,7 +37,6 @@ namespace NPPGames.Core
 
         public virtual Bounds Bounds { get; private set; }
 
-
         public int LayerOrder { get; set; }
 
         protected void SetData(List<char> storage, string data)
@@ -105,5 +104,6 @@ namespace NPPGames.Core
             return result;
         }
 
+        public virtual void ResumeGame() { }
     }
 }

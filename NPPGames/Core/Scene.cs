@@ -44,6 +44,11 @@ namespace NPPGames.Core
 
         #endregion
 
+        #region protected overridable methods
+
+
+        #endregion
+
         #region public methods
 
         public virtual void Update()
@@ -113,6 +118,14 @@ namespace NPPGames.Core
 
             Playerboard = board;
             AddSprite(Playerboard);
+        }
+
+        public void ResumeGame()
+        {
+            foreach (var sprite in Sprites)
+            {
+                sprite.ResumeGame();
+            }
         }
 
         public virtual void OnStartScene(Scene lastScene) { }

@@ -72,5 +72,9 @@ namespace NPPGames.Core.Renderers
                 this.SceneSize = newSize;
         }
 
+        public void Dispose()
+        {
+            
+        }
     }
 }

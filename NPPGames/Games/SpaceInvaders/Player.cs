@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NPPGames.Core;
 using NPPGames.Core.Audio;
 using NPPGames.Core.Primitives;
@@ -7,20 +8,32 @@ namespace NPPGames.Games.SpaceInvaders
 {
     public class Player : Sprite, ICollider, ITrajectory, IShooter
     {
-        const string data = @"COME ON!!!!!";
-        public Player(GameData gameData, Scene scene, int width, int height)
-            : base(gameData, scene, width, height)
+        const string happy = @"    /\    
+ ^ /~~\ ^ 
+|--------|
+|--------|";
+        const string sad = @" *^ - - * 
+*  -   - *
+* -  ^   *
+ *   ~  * ";
+        public Player(GameData gameData, Scene scene)
+            : base(gameData, scene, 10, 4)
         {
-            base.SetData(data);
+            base.SetData(happy);
             CollisionBehavior = CollisionBehavior.RunDestroySequence;
             DeathPlayer = new AudioTrackPlayer();
             DeathPlayer.AddTrack(new AudioTrack(NPPGames.Properties.Resources.SIPD));
             CollidesWithTypes = new List<string>() { SpriteTypes.ALIEN, SpriteTypes.ALIEN_BULLET };
         }
-
         private AudioTrackPlayer DeathPlayer { get; set; }
 
         private Bullet CurrentBullet { get; set; }
+
+        public override void ResumeGame()
+        {
+            base.ResumeGame();
+            base.SetData(happy);
+        }
 
         #region ICollider members
 
@@ -29,6 +42,7 @@ namespace NPPGames.Games.SpaceInvaders
             // we don't actually want to delete the player
             DeathPlayer.Play();
             Scene.Playerboard.RemoveLife();
+            base.SetData(sad);
             ((SIGameData)GameData).PlayerDeath = true;
         }
 

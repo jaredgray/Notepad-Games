@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Kbg.NppPluginNET.PluginInfrastructure;
 using NPPGames;
@@ -16,10 +17,7 @@ namespace Kbg.NppPluginNET
         static IScintillaGateway editor;
         static INotepadPPGateway notepad;
         static Logger logger;
-        public static readonly int COMMAND_SORT = 0;
-        public static readonly int COMMAND_PLAYSHOOTER = 1;
-        public static readonly int COMMAND_STARTLOGGING = 2;
-        public static readonly int COMMAND_ENDLOGGING = 3;
+        public static readonly int COMMAND_SPACEINVADERS = 0;
 
         static IntPtr CurrentWindowId;
         static Dictionary<IntPtr, SpaceInvaders> spaceInvaderGames;
@@ -33,7 +31,7 @@ namespace Kbg.NppPluginNET
             notepad = new NotepadPPGateway();
             logger = new Logger(@"C:\Temp\NPPGamesLog.txt");
             NppRenderer = new NppRenderer(notepad, editor, logger);
-            editor.StartRecord();
+            //editor.StartRecord();
             logger.StartLogging();
 
         }
@@ -47,9 +45,28 @@ namespace Kbg.NppPluginNET
         {
             var service = new LeaderboardService();
             var game = new SpaceInvaders(renderer, service);
+            game.GameOver += Game_GameOver;
             spaceInvaderGames.Add(IntPtr.Zero, game);
             game.Initialize();
             game.Run();
+        }
+
+        private static void Game_GameOver(object sender, EventArgs e)
+        {
+            var currentWindowid = editor.GetDocPointer();
+            logger.WriteLine($"{currentWindowid}-{DateTime.Now} Game Over Invoked");
+            if (spaceInvaderGames.ContainsValue((SpaceInvaders)sender))
+            {
+                var gameentry = spaceInvaderGames.FirstOrDefault(x => x.Value.Equals(sender));
+                spaceInvaderGames.Remove(gameentry.Key);
+
+                var gameWindowid = gameentry.Key;
+                if (gameWindowid == currentWindowid)
+                {
+                    logger.WriteLine($"{currentWindowid}-{DateTime.Now} Game Over");
+                    notepad.CloseCurrent();
+                }
+            }
         }
 
         /// <summary>
@@ -58,6 +75,9 @@ namespace Kbg.NppPluginNET
         /// <param name="notification"></param>
         public static void OnNotification(ScNotification notification)
         {
+            if (spaceInvaderGames.Count == 0)
+                return;
+
             // get document pointer and notify game
             var newWindowId = editor.GetDocPointer();
 
@@ -94,12 +114,6 @@ namespace Kbg.NppPluginNET
                         logger.WriteLine($"{newWindowId}-{DateTime.Now} Resuming Game");
                         game.GameData.IsActive = true;
                     }
-                    if (game.Quit)
-                    {
-                        game.Quit = false;
-                        spaceInvaderGames.Remove(newWindowId);
-                        notepad.CloseCurrent();
-                    }
                 }
             }
 
@@ -133,7 +147,7 @@ namespace Kbg.NppPluginNET
 
         public static void CommandMenuInit()
         {
-            PluginBase.SetCommand(COMMAND_PLAYSHOOTER, "Play Space Invaders", PlaySpaceInvadersGame, new ShortcutKey(false, false, false, Keys.None));
+            PluginBase.SetCommand(COMMAND_SPACEINVADERS, "Play Space Invaders", PlaySpaceInvadersGame, new ShortcutKey(false, false, false, Keys.None));
             //PluginBase.SetCommand(COMMAND_STARTLOGGING, "DEV - Start Logging", BeginLogging, new ShortcutKey(false, false, false, Keys.None));
             //PluginBase.SetCommand(COMMAND_ENDLOGGING, "DEV - END Logging", EndLogging, new ShortcutKey(false, false, false, Keys.None));
         }
@@ -161,7 +175,7 @@ namespace Kbg.NppPluginNET
 
         internal static void EndLogging()
         {
-            Try(() => logger.StopLogging());
+            Try(() => logger.Dispose());
         }
 
         #endregion
@@ -170,17 +184,11 @@ namespace Kbg.NppPluginNET
         {
             var service = new LeaderboardService();
             var game = new SpaceInvaders(NppRenderer, service);
+            game.GameOver += Game_GameOver;
             game.Initialize();
             var windowId = editor.GetDocPointer();
             spaceInvaderGames.Add(windowId, game);
             game.Run();
-        }
-
-
-        private static void AddTextToEditor(string text)
-        {
-            editor.AddText(text.Length, text);
-            editor.NewLine();
         }
 
         private static void Try(Action action, bool showError = true)
